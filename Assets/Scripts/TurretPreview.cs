@@ -10,7 +10,7 @@ public class TurretPreview : MonoBehaviour
 
     void Start()
     {
-        buildManager = BuildManager.instance;      
+        buildManager = BuildManager.instance;
     }
 
     void Update()

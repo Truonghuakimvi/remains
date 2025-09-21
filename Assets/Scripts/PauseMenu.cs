@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
         {
             Time.timeScale = 0;
             GameManager.gamePaused = true;
-            BuildManager.instance.GetComponent<AudioSource>().Pause();       
+            BuildManager.instance.GetComponent<AudioSource>().Pause();
         }
         else
         {
@@ -57,6 +57,10 @@ public class PauseMenu : MonoBehaviour
     public void Retreat()
     {
         PlayerStats.Lives = 0;
-        Toggle();
+
+        if (ui.activeSelf)
+        {
+            Toggle();
+        }
     }
 }
