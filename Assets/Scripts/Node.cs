@@ -14,6 +14,7 @@ public class Node : MonoBehaviour
     public GameObject turretButton;
 
     BuildManager buildManager;
+
     [SerializeField]
     private bool isGround;
 
@@ -87,7 +88,11 @@ public class Node : MonoBehaviour
 
         PlayerStats.Money -= blueprint.cost;
 
-        GameObject effect = Instantiate(buildManager.buildEffect, transform.position, Quaternion.identity);
+        GameObject effect = Instantiate(
+            buildManager.buildEffect,
+            transform.position,
+            Quaternion.identity
+        );
         Destroy(effect, 5f);
 
         GameObject turret = Instantiate(blueprint.prefab, transform.position, Quaternion.identity);
@@ -96,7 +101,7 @@ public class Node : MonoBehaviour
 
         buildManager.PlayBuildSFX();
         turretButton.SetActive(false);
-	}
+    }
 
     public void SellTurret()
     {
@@ -108,13 +113,16 @@ public class Node : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (turret != null)
+        if (
+            turret != null
+            && (
+                turret.GetComponent<Turret>() != null && turret.GetComponent<Turret>().health > 0
+                || turret.GetComponent<Healer>() != null && turret.GetComponent<Healer>().health > 0
+            )
+        )
         {
-            if (turret.GetComponent<Turret>() != null && turret.GetComponent<Turret>().health > 0 || turret.GetComponent<Healer>() != null && turret.GetComponent<Healer>().health > 0)
-            {
-                buildManager.SelectedNode(this);
-                return;
-            }
+            buildManager.SelectedNode(this);
+            return;
         }
 
         if (!buildManager.turretIsSelected)

@@ -111,7 +111,7 @@ public class NodeUI : MonoBehaviour
             selectedTurret ? selectedTurret.maxHealth : selectedHealer.maxHealth
         );
 
-        hpText.text = $"{hp} / {maxHp}";
+        hpText.text = $"{hp}/{maxHp}";
         attackText.text = $"ATK {(selectedTurret ? selectedTurret.damage : selectedHealer.damage)}";
 
         if (hpBarForeground != null && maxHp > 0)
