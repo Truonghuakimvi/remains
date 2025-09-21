@@ -43,6 +43,7 @@ public class Turret : MonoBehaviour
         flipDirection = sprite.transform.localScale.x;
         startCooldown = false;
         rangeUI.SetActive(false);
+        healthUI.SetActive(true);
         health = maxHealth;
         animator = GetComponent<Animator>();
         InvokeRepeating("UpdateTarget", 0f, 0.1f);
@@ -55,21 +56,6 @@ public class Turret : MonoBehaviour
             animator.enabled = false;
             healthUI.SetActive(false);
             return;
-        }
-
-        if (GameManager.gamePaused)
-        {
-            healthUI.SetActive(false);
-            return;
-        }
-
-        if (health < maxHealth)
-        {
-            healthUI.SetActive(true);
-        }
-        else
-        {
-            healthUI.SetActive(false);
         }
 
         if (startCooldown && fireCountdown > 0)

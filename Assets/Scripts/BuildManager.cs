@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class BuildManager : MonoBehaviour
 {
-	public static BuildManager instance;
+    public static BuildManager instance;
+
     void Awake()
     {
         instance = this;
@@ -50,10 +51,18 @@ public class BuildManager : MonoBehaviour
     public void PreviewTurretOn()
     {
         PreviewTurretDestroy();
-        GameObject turretPreview = Instantiate(turretToBuild.prefab, preview.transform.position, Quaternion.identity);
+        GameObject turretPreview = Instantiate(
+            turretToBuild.prefab,
+            preview.transform.position,
+            Quaternion.identity
+        );
         if (isMapFlipped)
         {
-            turretPreview.transform.localScale = new Vector3(-turretPreview.transform.localScale.x, turretPreview.transform.localScale.y, turretPreview.transform.localScale.z);
+            turretPreview.transform.localScale = new Vector3(
+                -turretPreview.transform.localScale.x,
+                turretPreview.transform.localScale.y,
+                turretPreview.transform.localScale.z
+            );
         }
         SetGameLayerRecursive(turretPreview, LayerMask.NameToLayer("Top Layer"));
         if (turretPreview.GetComponent<Turret>() != null)
@@ -63,7 +72,7 @@ public class BuildManager : MonoBehaviour
         else
         {
             turretPreview.GetComponent<Healer>().enabled = false;
-        }     
+        }
         turretPreview.GetComponent<Animator>().enabled = false;
         turretPreview.tag = "Untagged";
 
@@ -81,7 +90,7 @@ public class BuildManager : MonoBehaviour
 
     public void PreviewTurretOnNode(Node node, bool enterNode)
     {
-        if (enterNode == true && node.turret == null)
+        if (enterNode && node.turret == null)
         {
             preview.transform.position = node.transform.position;
             preview.GetComponent<TurretPreview>().isOnNode = true;
@@ -122,6 +131,7 @@ public class BuildManager : MonoBehaviour
     {
         buildSFX.Play();
     }
+
     public void PlayRetreatSFX()
     {
         retreatSFX.Play();

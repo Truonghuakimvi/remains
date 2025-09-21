@@ -54,7 +54,7 @@ public class PartySlot : MonoBehaviour
         }
     }
 
-    public void AddItem (TurretBlueprint newTurret)
+    public void AddItem(TurretBlueprint newTurret)
     {
         turret = newTurret;
         icon.sprite = turret.icon;
